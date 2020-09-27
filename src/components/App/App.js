@@ -8,8 +8,9 @@ import { Provider } from "react-redux";
 import Header from "../Header/Header";
 import Registro from "../Auth/Registro";
 import InicioSesion from "../Auth/InicioSesion";
+import CuentasLista from "../Cuentas/CuentasLista";
 import AuthRoute from "./AuthRoute";
-// import SecuredRoute from "./SecuredRoute";
+import SecuredRoute from "./SecuredRoute";
 import "notyf/notyf.min.css";
 
 const App = () => {
@@ -17,7 +18,7 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Header />
-        <div className="App ">
+        <div className="App container">
           <Route path="/" exact component={Home} />
 
           <AuthRoute path="/auth/registrarse" exact component={Registro} />
@@ -26,6 +27,7 @@ const App = () => {
             exact
             component={InicioSesion}
           />
+          <SecuredRoute path="/cuentas" exact component={CuentasLista} />
         </div>
       </Router>
     </Provider>

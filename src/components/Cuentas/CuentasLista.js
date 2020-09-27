@@ -1,49 +1,42 @@
 import React from "react";
 import { useEffect } from "react";
 import Cuenta from "./Cuenta";
+import { fetchCuentasByClienteId } from "../../state-mgmt/actions/cuenta-actions";
 
-const CuentasLista = ({ cliente, fetchCuentas, cuentas }) => {
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+const CuentasLista = ({ cliente, fetchCuentasByClienteId, cuentas }) => {
   useEffect(() => {
-    fetchCuentas();
+    fetchCuentasByClienteId(cliente._id);
   }, []);
 
   return (
-    <div>
-      <h4>
+    <div className="mt-4">
+      <h4 className="mb-3">
         Cuentas de {cliente.nombre} {cliente.apellido}
       </h4>
 
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Tipo</th>
-            <th scope="col">Balance disponible</th>
-            <th scope="col">Balance actual</th>
-            <th scope="col">Número</th>
-            <th scope="col">Cantidad en tránsito</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cuentas &&
-            cuentas.map((cuenta) => (
-              <Cuenta key={cuenta._id} cuenta={cuenta} />
-            ))}
-        </tbody>
-      </table>
+      {cuentas &&
+        cuentas.map((cuenta) => <Cuenta key={cuenta._id} cuenta={cuenta} />)}
     </div>
   );
 };
 
 CuentasLista.propTypes = {
-  fetchCuentas: PropTypes.func.isRequired,
+  fetchCuentasByClienteId: PropTypes.func.isRequired,
   cuentas: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  cuentas: state.cuentas.cuentas,
-  cliente: state.auth.cliente,
-});
+const mapStateToProps = (state) => {
+  console.log(state);
+
+  return {
+    cuentas: state.cuentas.cuentas,
+    cliente: state.auth.cliente,
+  };
+};
 
 export default connect(mapStateToProps, {
-  fetchCuentas,
+  fetchCuentasByClienteId,
 })(CuentasLista);

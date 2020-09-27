@@ -28,7 +28,7 @@ const Header = ({ usuarioActual, cerrarSesion, cliente }) => {
         <Navbar.Collapse id="basic-navbar-nav">
           {usuarioActual.email && (
             <Nav className="ml-auto">
-              <Link className="navbar-brand" to="/home">
+              <Link className="navbar-brand" to="/cuentas">
                 Cuentas
               </Link>
               <Link className="navbar-brand" to="/link">

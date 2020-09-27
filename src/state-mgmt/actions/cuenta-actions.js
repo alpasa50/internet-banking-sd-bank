@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API_URL } from "../../utils/constants";
 import {
   FETCH_CUENTA_DETALLES,
   FETCH_CUENTAS_FROM_CLIENTE_CEDULA,
