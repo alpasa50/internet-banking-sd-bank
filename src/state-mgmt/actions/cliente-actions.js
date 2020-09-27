@@ -15,11 +15,7 @@ export const fetchClienteById = (_id) => async (dispatch) => {
 };
 
 export const fetchClienteByCedula = (cedula) => async (dispatch) => {
-  const params = {
-    cedula,
-  };
-
-  const { data } = await axios.get(`${API_URL}/clientes/por_cedula/${cedula} `);
+  const { data } = await axios.get(`${API_URL}/clientes/por_cedula/${cedula}`);
 
   console.log(data);
 

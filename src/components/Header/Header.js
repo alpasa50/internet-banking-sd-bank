@@ -1,40 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { cerrarSesion } from "../../state-mgmt/actions/auth-actions";
+import notyf from "../../utils/notyf";
 
-const Header = () => {
+const Header = ({ usuarioActual, cerrarSesion, cliente }) => {
+  const handleCerrarSesion = () => {
+    cerrarSesion();
+
+    notyf.success("¡Sesión cerrada exitosamente!");
+  };
+
   const mainStyle = {
     cursor: "pointer",
   };
 
-  return (
-    <>
-      <Navbar style={mainStyle} bg="light" expand="lg">
-        <Container>
-          <Navbar.Brand Link="/">Sd-Bank</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
+  const navbar = (
+    <Navbar style={mainStyle} bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand>
+          <Link className="navbar-brand" to="/">
+            Sd-Bank
+          </Link>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          {usuarioActual.email && (
+            <Nav className="ml-auto">
               <Link className="navbar-brand" to="/home">
-                Home
+                Cuentas
               </Link>
               <Link className="navbar-brand" to="/link">
-                Link
+                Transferencias
               </Link>
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
+              <NavDropdown
+                title={`${cliente.nombre} ${cliente.apellido}`}
+                id="basic-nav-dropdown"
+              >
+                <NavDropdown.Item onClick={() => handleCerrarSesion()}>
+                  <Link className="navbar-brand" to="/">
+                    Cerrar sesión
+                  </Link>
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
+          )}
+
+          {!usuarioActual.email && (
             <Nav className="ml-auto">
               <Link className="navbar-brand" to="/auth/iniciar-sesion">
                 Iniciar sesión
@@ -43,11 +56,18 @@ const Header = () => {
                 Registrarse
               </Link>
             </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </>
+          )}
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
+
+  return <>{navbar}</>;
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  usuarioActual: state.auth.usuarioActual,
+  cliente: state.auth.cliente,
+});
+
+export default connect(mapStateToProps, { cerrarSesion })(Header);

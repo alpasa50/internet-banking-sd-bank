@@ -6,7 +6,9 @@ import Home from "./components/Home/Home";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import Header from "./components/Header/Header";
-import Registro from "./components/Auth/Registro/Registro";
+import Registro from "./components/Auth/Registro";
+import InicioSesion from "./components/Auth/InicioSesion";
+import "notyf/notyf.min.css";
 
 const App = () => {
   return (
@@ -17,7 +19,7 @@ const App = () => {
           <Route path="/" exact component={Home} />
 
           <Route path="/auth/registrarse" exact component={Registro} />
-          {/* <Route path="/auth/iniciar-sesion" exact component={Inicio} /> */}
+          <Route path="/auth/iniciar-sesion" exact component={InicioSesion} />
         </div>
       </Router>
     </Provider>

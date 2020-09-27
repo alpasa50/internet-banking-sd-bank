@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import clientesReducer from "./cliente-reducer";
+import clienteReducer from "./cliente-reducer";
+import cuentaReducer from "./cuenta-reducer";
 import authReducer from "./auth-reducer";
 
 export default combineReducers({
-  clientes: clientesReducer,
   auth: authReducer,
+  clientes: clienteReducer,
+  cuentas: cuentaReducer,
 });

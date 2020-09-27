@@ -8,7 +8,7 @@ const initialState = {
   cliente: {},
 };
 
-const clientesReducer = () => (state = initialState, action) => {
+export default function (state = initialState, action) {
   switch (action.type) {
     case FETCH_CLIENTE_BY_CEDULA:
       return {
@@ -21,8 +21,6 @@ const clientesReducer = () => (state = initialState, action) => {
         cliente: action.payload,
       };
     default:
-      return state;
+      return { ...state };
   }
-};
-
-export default clientesReducer;
+}
