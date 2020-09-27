@@ -188,7 +188,7 @@ const Registro = ({ registrarse, fetchClienteByCedula, cliente }) => {
   );
 };
 
-Registro.prototypes = {
+Registro.propTypes = {
   fetchClienteByCedula: PropTypes.func.isRequired,
   registrarse: PropTypes.func.isRequired,
   cliente: PropTypes.object.isRequired,

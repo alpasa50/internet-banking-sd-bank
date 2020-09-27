@@ -34,4 +34,16 @@ const CuentasLista = ({ cliente, fetchCuentas, cuentas }) => {
   );
 };
 
-export default CuentasLista;
+CuentasLista.propTypes = {
+  fetchCuentas: PropTypes.func.isRequired,
+  cuentas: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  cuentas: state.cuentas.cuentas,
+  cliente: state.auth.cliente,
+});
+
+export default connect(mapStateToProps, {
+  fetchCuentas,
+})(CuentasLista);

@@ -107,7 +107,7 @@ const InicioSesion = ({ iniciarSesion }) => {
   );
 };
 
-InicioSesion.prototypes = {
+InicioSesion.propTypes = {
   iniciarSesion: PropTypes.func.isRequired,
 };
 
