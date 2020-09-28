@@ -40,7 +40,7 @@ export const registrarse = (usuario) => async (dispatch) => {
     })
   );
 
-  localStorage.setItem("cliente", JSON.stringify(data.cliente));
+  localStorage.setItem("cliente", JSON.stringify(data.entidad));
 
   if (!localStorage.getItem("token")) localStorage.setItem("token", data.token);
 
@@ -62,7 +62,7 @@ export const iniciarSesion = (usuario) => async (dispatch) => {
     headers,
   });
 
-  localStorage.setItem("cliente", JSON.stringify(data.cliente));
+  localStorage.setItem("cliente", JSON.stringify(data.entidad));
 
   localStorage.setItem(
     "usuarioActual",

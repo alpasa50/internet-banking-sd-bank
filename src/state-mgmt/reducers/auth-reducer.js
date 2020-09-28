@@ -6,9 +6,12 @@ import {
   CERRAR_SESION,
 } from "../types/auth-types";
 
+const usuarioActualState = localStorage.getItem("usuarioActual");
+const clienteState = localStorage.getItem("cliente");
+
 const initialState = {
-  usuarioActual: JSON.parse(localStorage.getItem("usuarioActual")) || {},
-  cliente: JSON.parse(localStorage.getItem("cliente")) || {},
+  usuarioActual: usuarioActualState ? JSON.parse(usuarioActualState) : {},
+  cliente: clienteState ? JSON.parse(clienteState) : {},
 };
 
 export default function (state = initialState, action) {
@@ -20,12 +23,12 @@ export default function (state = initialState, action) {
       };
     case REGISTRARSE:
       return {
-        ...state,
+      ...state,
         usuarioActual: {
           token: action.payload.token,
           email: action.payload.email,
         },
-        cliente: action.payload.cliente,
+        cliente: action.payload.entidad,
       };
     case INICIAR_SESION:
       return {
@@ -34,7 +37,7 @@ export default function (state = initialState, action) {
           token: action.payload.token,
           email: action.payload.email,
         },
-        cliente: action.payload.cliente,
+        cliente: action.payload.entidad,
       };
     case OBTENER_USUARIO_ACTUAL:
       return {
