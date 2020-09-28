@@ -41,6 +41,7 @@ const InicioSesion = ({ iniciarSesion }) => {
 
       setTimeout(() => setRedireccion(true), 1500);
     } catch (error) {
+      
       setError(error.response.data.error);
     }
   };

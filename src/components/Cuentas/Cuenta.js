@@ -6,8 +6,6 @@ import { Card } from "react-bootstrap";
 const Cuenta = ({ cuenta }) => {
   const createdAt = formatDate(cuenta.created_at);
 
-
-
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Body>
@@ -24,10 +22,7 @@ const Cuenta = ({ cuenta }) => {
           Detalles
           <i className="ml-1 fas fa-info-circle"></i>
         </Card.Link>
-        <Card.Link
-          styles={linkStyles}
-          to={`/cuenta/${cuenta.numero_de_cuenta}/movimientos`}
-        >
+        <Card.Link to={`/cuenta/${cuenta.numero_de_cuenta}/movimientos`}>
           Movimientos <i className="ml-1 fas fa-cash-register"></i>
         </Card.Link>
       </Card.Body>

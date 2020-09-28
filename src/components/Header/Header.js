@@ -26,7 +26,7 @@ const Header = ({ usuarioActual, cerrarSesion, cliente }) => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          {usuarioActual.email && (
+          {usuarioActual.email && cliente.nombre &&  (
             <Nav className="ml-auto">
               <Link className="navbar-brand" to="/cuentas">
                 Cuentas
