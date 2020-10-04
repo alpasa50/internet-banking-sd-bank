@@ -1,50 +1,98 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import { fetchTransaccionesFromCuenta } from "../../state-mgmt/actions/cuenta.actions";
+import { Button, Table } from "antd";
 import { connect } from "react-redux";
-import Transaccion from "./Transaccion";
+import { formatDate, formatCurrency } from "../../utils/formatter";
+import { Link } from "react-router-dom";
 
-const TransaccionesLista = ({ fetchTransacciones, transacciones, cuenta }) => {
+const TransaccionLista = ({
+  match,
+  fetchTransaccionesFromCuenta,
+  transacciones,
+}) => {
+  const { _id } = match.params;
+
   useEffect(() => {
-    fetchTransacciones();
+    fetchTransaccionesFromCuenta(_id);
   }, []);
 
-  return (
-    <div>
-      <h3>Transacciones de la cuenta {cuenta.numero_de_cuenta}</h3>
+  const columns = [
+    {
+      title: "Cantidad",
+      dataIndex: "cantidad",
+    },
+    {
+      title: "Descripción",
+      dataIndex: "descripcion",
+    },
+    {
+      title: "Aprobada",
+      dataIndex: "aprobada",
+    },
+    {
+      title: "Cantidad en tránsito",
+      dataIndex: "cantidad_en_transito",
+    },
+    {
+      title: "Fecha/hora",
+      dataIndex: "createdAt",
+    },
+    {
+      title: "Operación",
+      key: "operacion",
+      render: (_, transaccion) => (
+        <span>
+          <Link
+            to={`/cuentas/${_id}/transacciones/${transaccion._id}/detalles/${transaccion.tipo}`}
+          >
+            <i style={detailsStyles} className="far fa-eye"></i>
+          </Link>
+        </span>
+      ),
+    },
+  ];
 
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Descripción</th>
-            <th scope="col">Monto</th>
-            <th scope="col">Tipo</th>
-            <th scope="col">Aprobada</th>
-            <th scope="col">Cantidad en tránsito</th>
-            <th scope="col">Destinatario</th>
-            <th scope="col">Fecha</th>
-          </tr>
-        </thead>
-        <tbody>
-          {transacciones &&
-            transacciones.map((transaccion) => (
-              <Transaccion key={transaccion._id} transaccion={transaccion} />
-            ))}
-        </tbody>
-      </table>
+  const dataMapped =
+    transacciones &&
+    transacciones.map((transaccion) => ({
+      ...transaccion,
+      createdAt: formatDate(transaccion.createdAt),
+      updatedAt: formatDate(transaccion.updatedAt),
+      key: transaccion._id,
+      aprobada: transaccion.aprobada ? "Sí" : "No",
+      cantidad: formatCurrency(transaccion.cantidad),
+      cantidad_en_transito: formatCurrency(transaccion.cantidad_en_transito),
+    }));
+
+  const detailsStyles = {
+    color: "#2364db",
+    fontSize: "2rem",
+    marginRight: "20px",
+  };
+
+  return (
+    <div className="container mt-4">
+      <Link to="/cuentas">
+        <Button className="mb-4" type="primary">
+          <i className="fas fa-arrow-left"></i>
+        </Button>
+      </Link>
+      <h2 className="title-styles">Transacciones</h2>
+      <Table
+        className="ant-table"
+        columns={columns}
+        pagination={{ pageSize: 10 }}
+        bordered
+        dataSource={dataMapped}
+      />
     </div>
   );
 };
 
-TransaccionesLista.prototypes = {
-  fetchTransacciones: PropTypes.func.isRequired,
-  transacciones: PropTypes.array.isRequired,
-  cuenta: PropTypes.string.isRequired,
-};
-
 const mapStateToProps = (state) => ({
-  transacciones: state.transacciones,
+  transacciones: state.cuentas.transacciones,
 });
 
-export default connect(mapStateToProps, { fetchTransacciones })(
-  TransaccionesLista
-);
+export default connect(mapStateToProps, {
+  fetchTransaccionesFromCuenta,
+})(TransaccionLista);

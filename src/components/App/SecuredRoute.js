@@ -10,6 +10,7 @@ const SecuredRoute = (props) => {
   return (
     <Route
       path={path}
+      exact
       render={(data) =>
         usuarioActual.token ? (
           <props.component {...data}></props.component>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import Cuenta from "./Cuenta";
-import { fetchCuentasByClienteId } from "../../state-mgmt/actions/cuenta-actions";
+import { fetchCuentasByClienteId } from "../../state-mgmt/actions/cuenta.actions";
 
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -13,7 +13,7 @@ const CuentasLista = ({ cliente, fetchCuentasByClienteId, cuentas }) => {
 
   return (
     <div className="mt-4">
-      <h4 className="mb-3">
+      <h4 className="mb-3 title-styles">
         Cuentas de {cliente.nombre} {cliente.apellido}
       </h4>
 

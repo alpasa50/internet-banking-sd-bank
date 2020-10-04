@@ -1,1 +1,1 @@
-export const API_URL = "http://localhost:5000/internet-banking-api/v1";
+export const API_URL = String(process.env.REACT_APP_API_URL);

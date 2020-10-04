@@ -4,6 +4,7 @@ import { iniciarSesion } from "../../state-mgmt/actions/auth-actions";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import notyf from "../../utils/notyf";
+import { Form, Input, Button } from "antd";
 
 const USUARIO_INICIAL = {
   email: "",
@@ -22,7 +23,7 @@ const InicioSesion = ({ iniciarSesion }) => {
     formularioValido ? setDeshabilitado(false) : setDeshabilitado(true);
   }, [usuario]);
 
-  const manejarCambio = (event) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
 
     setError("");
@@ -30,7 +31,7 @@ const InicioSesion = ({ iniciarSesion }) => {
     setUsuario((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const manejarEnvio = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
@@ -39,11 +40,21 @@ const InicioSesion = ({ iniciarSesion }) => {
       await iniciarSesion({ ...usuario });
       notyf.success("¡Sesión iniciada exitosamente!");
 
-      setTimeout(() => setRedireccion(true), 1500);
+      setTimeout(() => setRedireccion(true), 300);
     } catch (error) {
-      
       setError(error.response.data.error);
     }
+  };
+
+  const validationMessages = {
+    required: "El campo ${label} es obligatorio.",
+    types: {
+      email: "${label} no es un email válido.",
+      number: "${label} no es un número válido.",
+    },
+    number: {
+      range: "${label} debe estar entre ${min} y ${max} caracteres.",
+    },
   };
 
   return (
@@ -51,56 +62,54 @@ const InicioSesion = ({ iniciarSesion }) => {
       {redireccion ? (
         <Redirect to="/" />
       ) : (
-        <div className="mt-3 container">
-          <div className="row">
-            <div className="col-md-5">
-              <h3 className="mb-4">Iniciar sesión</h3>
+        <div className="container mt-4">
+          <div className="col-md-6">
+            <h4 className="mb-4">Iniciar Sesión</h4>
+            <Form
+              onSubmitCapture={(e) => handleSubmit(e)}
+              validateMessages={validationMessages}
+            >
+              <Form.Item
+                name={"email"}
+                label="Email"
+                type={"email"}
+                rules={[{ required: true, email: true }]}
+              >
+                <Input
+                  placeholder="correo@gmail.com"
+                  name="email"
+                  value={usuario.email}
+                  className="form-control"
+                  onChange={handleChange}
+                />
+              </Form.Item>
+              <Form.Item
+                name={"contrasenia"}
+                label="Contraseña"
+                rules={[{ required: true }]}
+              >
+                <Input
+                  placeholder="Contraseña"
+                  name="contrasenia"
+                  value={usuario.contrasenia}
+                  type="password"
+                  className="form-control"
+                  onChange={handleChange}
+                />
+              </Form.Item>
 
-              <form onSubmit={manejarEnvio}>
-                <div className="text-left form-group">
-                  <label for="email">Email</label>
-                  <input
-                    type="email"
-                    value={usuario.email}
-                    name="email"
-                    onChange={manejarCambio}
-                    placeholder="abc@gmail.com"
-                    className="form-control"
-                  />
+              {error && (
+                <div className="error-text">
+                  <h3>
+                    <i className="fas fa-exclamation-circle"></i> Error
+                  </h3>
+                  <p>{error}</p>
                 </div>
-                <div className="text-left form-group">
-                  <label for="contrasenia">Contraseña</label>
-
-                  <input
-                    value={usuario.contrasenia}
-                    name="contrasenia"
-                    onChange={manejarCambio}
-                    maxLength="20"
-                    placeholder="Contraseña"
-                    type="password"
-                    className="form-control"
-                  />
-                </div>
-
-                {error && (
-                  <div className="text-danger mb-3">
-                    <i className="fas fa-exclamation-triangle mr-3"></i>
-                    {error}
-                  </div>
-                )}
-
-                <div className="form-group">
-                  <button
-                    disabled={deshabilitado}
-                    type="submit"
-                    className="btn btn-success btn-block"
-                  >
-                    Iniciar sesión
-                    <i className="ml-2 far fa-save"></i>
-                  </button>
-                </div>
-              </form>
-            </div>
+              )}
+              <Button type="primary" disabled={deshabilitado} htmlType="submit">
+                Iniciar Sesión <i className="ml-2 far fa-save"></i>
+              </Button>
+            </Form>
           </div>
         </div>
       )}

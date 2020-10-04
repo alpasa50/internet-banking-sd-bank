@@ -1,13 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { formatCurrency, formatDate } from "../../utils/formatter";
 import PropTypes from "prop-types";
 import { Card } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 
 const Cuenta = ({ cuenta }) => {
+  const [redirect, setRedirect] = useState("");
+
   const createdAt = formatDate(cuenta.created_at);
 
+  const handleRedirect = (path) => {
+    setRedirect(`${path}`);
+  };
+
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card className="card-styles">
+      {redirect && <Redirect to={redirect} />}
       <Card.Body>
         <Card.Title>{cuenta.numero_de_cuenta}</Card.Title>
         <hr />
@@ -18,11 +26,15 @@ const Cuenta = ({ cuenta }) => {
           {formatCurrency(cuenta.balance_actual)} disponibles
         </Card.Text>
         <Card.Text>Esta cuenta fue abierta en {createdAt}.</Card.Text>
-        <Card.Link to={`/cuenta/${cuenta.numero_de_cuenta}/detalles`}>
-          Detalles
-          <i className="ml-1 fas fa-info-circle"></i>
+        <Card.Link
+          onClick={() => handleRedirect(`/cuentas/${cuenta._id}/detalles`)}
+        >
+          <i className="ml-1 fas fa-info-circle"></i> Detalles
         </Card.Link>
-        <Card.Link to={`/cuenta/${cuenta.numero_de_cuenta}/movimientos`}>
+        <Card.Link
+          className="ml-3 movimientos"
+          onClick={() => handleRedirect(`/cuentas/${cuenta._id}/transacciones`)}
+        >
           Movimientos <i className="ml-1 fas fa-cash-register"></i>
         </Card.Link>
       </Card.Body>

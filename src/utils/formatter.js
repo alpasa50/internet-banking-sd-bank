@@ -1,9 +1,10 @@
 import moment from "moment";
 
 export const formatDate = (date) => {
-  const dateFormatted = JSON.stringify(moment(date).format("LLL"));
+  moment.locale("es");
+  const dateFormatted = moment(date).locale("es").format("LLL");
 
-  return dateFormatted.slice(1, dateFormatted.length - 1);
+  return dateFormatted;
 };
 
 export const formatCurrency = (amount) =>
