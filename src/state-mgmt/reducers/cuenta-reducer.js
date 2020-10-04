@@ -1,9 +1,11 @@
 import {
   FETCH_CUENTAS_BY_CIENTE_ID,
-  FETCH_CUENTA_DETALLES,
+  FETCH_CUENTA_BY_ID,
   FETCH_CUENTAS_FROM_CLIENTE_CEDULA,
   FETCH_CUENTAS_FROM_CLIENTE_ID,
   FETCH_TRANSACCIONES_CUENTA,
+  FETCH_TIPO_TRANSACCION,
+  FETCH_TRANSACCION_BY_ID,
 } from "../types/cuenta-types";
 
 const initialState = {
@@ -11,6 +13,8 @@ const initialState = {
   cuenta: {},
   transacciones: [],
   perfiles: [],
+  transaccion: {},
+  transaccionTipo: null,
 };
 
 export default function (state = initialState, action) {
@@ -20,10 +24,20 @@ export default function (state = initialState, action) {
         ...state,
         cuentas: action.payload,
       };
-    case FETCH_CUENTA_DETALLES:
+    case FETCH_CUENTA_BY_ID:
       return {
         ...state,
         cuenta: action.payload,
+      };
+    case FETCH_TIPO_TRANSACCION:
+      return {
+        ...state,
+        transaccionTipo: action.payload,
+      };
+    case FETCH_TRANSACCION_BY_ID:
+      return {
+        ...state,
+        transaccion: action.payload,
       };
     case FETCH_CUENTAS_FROM_CLIENTE_CEDULA:
       return {
