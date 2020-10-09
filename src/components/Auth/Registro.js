@@ -174,7 +174,7 @@ const Registro = ({ registrarse, fetchClienteByCedula, cliente }) => {
                   type="password"
                   className="form-control"
                   onChange={handleChange}
-                />``
+                />
               </Form.Item>
               {error && (
                 <div className="err-msg error-text">

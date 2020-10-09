@@ -33,6 +33,12 @@ const Header = ({ usuarioActual, cerrarSesion, cliente }) => {
                 <Menu.Item key="5">
                   <Link to="/cuentas">Cuentas</Link>
                 </Menu.Item>
+                <Menu.Item key="6">
+                  <Link to="/prestamos">Préstamos</Link>
+                </Menu.Item>
+                <Menu.Item key="7">
+                  <Link to="/transferencias">Transferencias</Link>
+                </Menu.Item>
                 {/* <Menu.Item key="6">
                   <Link to="/perfiles">Perfiles</Link>
                 </Menu.Item> */}

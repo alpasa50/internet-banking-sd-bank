@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   clientes: [],
-  cliente: {},
+  cliente: JSON.parse(localStorage.getItem("cliente")) || {},
 };
 
 export default function (state = initialState, action) {
