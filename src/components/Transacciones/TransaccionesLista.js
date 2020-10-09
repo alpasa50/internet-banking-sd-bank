@@ -14,24 +14,36 @@ const TransaccionLista = ({
 
   useEffect(() => {
     fetchTransaccionesFromCuenta(_id);
+
+    return () => {
+      transacciones = null;
+    };
   }, []);
 
   const columns = [
     {
-      title: "Cantidad",
-      dataIndex: "cantidad",
-    },
-    {
       title: "Descripción",
       dataIndex: "descripcion",
+    },
+    {
+      title: "Cantidad en tránsito",
+      dataIndex: "cantidad_en_transito",
     },
     {
       title: "Aprobada",
       dataIndex: "aprobada",
     },
     {
-      title: "Cantidad en tránsito",
-      dataIndex: "cantidad_en_transito",
+      title: "Cantidad",
+      dataIndex: "cantidad",
+    },
+    {
+      title: "Balance anterior",
+      dataIndex: "balance_anterior",
+    },
+    {
+      title: "Balance posterior",
+      dataIndex: "balance_posterior",
     },
     {
       title: "Fecha/hora",
@@ -61,6 +73,12 @@ const TransaccionLista = ({
       key: transaccion._id,
       aprobada: transaccion.aprobada ? "Sí" : "No",
       cantidad: formatCurrency(transaccion.cantidad),
+      balance_anterior: transaccion.balance_anterior
+        ? formatCurrency(transaccion.balance_anterior)
+        : "",
+      balance_posterior: transaccion.balance_posterior
+        ? formatCurrency(transaccion.balance_posterior)
+        : "",
       cantidad_en_transito: formatCurrency(transaccion.cantidad_en_transito),
     }));
 

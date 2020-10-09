@@ -6,15 +6,26 @@ import {
   FETCH_TRANSACCIONES_CUENTA,
   FETCH_TIPO_TRANSACCION,
   FETCH_TRANSACCION_BY_ID,
+  TRANSFERENCIA_PERSONAL,
+  TRANSFERENCIA_A_TERCERO,
+  FETCH_CUENTA_FROM_TERCERO,
+  FETCH_BENEFICIARIOS_FROM_CUENTA,
+  TRANSFERENCIA_INTERBANCARIA
 } from "../types/cuenta-types";
 
 const initialState = {
   cuentas: [],
+  cuentasPersonales: [],
+  cuentasMismoBanco: [],
+  cuentaFromTercero: {},
+  destinatario: null,
   cuenta: {},
   transacciones: [],
   perfiles: [],
   transaccion: {},
+  beneficiarios: [],
   transaccionTipo: null,
+  resFactura: null
 };
 
 export default function (state = initialState, action) {
@@ -47,14 +58,37 @@ export default function (state = initialState, action) {
     case FETCH_CUENTAS_FROM_CLIENTE_ID:
       return {
         ...state,
-        cuentas: action.payload,
+        cuentasPersonales: action.payload,
+      };
+    case TRANSFERENCIA_PERSONAL:
+      return {
+        ...state,
+      };
+    case TRANSFERENCIA_A_TERCERO:
+      return {
+        ...state,
+      };
+    case TRANSFERENCIA_INTERBANCARIA:
+      return {
+        ...state,
+        resFactura: action.payload
       };
     case FETCH_TRANSACCIONES_CUENTA:
       return {
         ...state,
         transacciones: action.payload,
       };
-
+    case FETCH_CUENTA_FROM_TERCERO:
+      return {
+        ...state,
+        destinatario: action.payload.cliente,
+        cuentaFromTercero: action.payload.cuenta,
+      };
+    case FETCH_BENEFICIARIOS_FROM_CUENTA:
+      return {
+        ...state,
+        beneficiarios: action.payload,
+      };
     default:
       return state;
   }

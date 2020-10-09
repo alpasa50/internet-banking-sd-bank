@@ -20,7 +20,7 @@ const CuentaDetalles = ({ match, cuenta, fetchCuentaById }) => {
         </Button>
       </Link>
 
-      <h2>Detalles del cuenta</h2>
+      <h2>Detalles de la cuenta</h2>
       {cuenta && cuenta.numero_de_cuenta && (
         <div>
           <div className="entity-details">

@@ -13,7 +13,11 @@ import CuentaDetalles from "../Cuentas/CuentaDetalles";
 import TransaccionesLista from "../Transacciones/TransaccionesLista";
 import TransaccionDetalles from "../Transacciones/TransaccionDetalles";
 import AuthRoute from "./AuthRoute";
+import PrestamosLista from "../Prestamos/PrestamosLista";
+import PrestamoDetalles from "../Prestamos/PrestamoDetalles";
+import Transferencias from "../Transferencias/Transferencias";
 import SecuredRoute from "./SecuredRoute";
+
 import "notyf/notyf.min.css";
 
 const App = () => {
@@ -43,6 +47,13 @@ const App = () => {
             component={TransaccionDetalles}
           />
           <SecuredRoute path="/cuentas" component={CuentasLista} />
+
+          <SecuredRoute path="/prestamos" component={PrestamosLista} />
+          <SecuredRoute
+            path="/prestamos/:_id/detalles"
+            component={PrestamoDetalles}
+          />
+          <SecuredRoute path="/transferencias" component={Transferencias} />
         </div>
       </Router>
     </Provider>
