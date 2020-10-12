@@ -19,6 +19,7 @@ import Transferencias from "../Transferencias/Transferencias";
 import SecuredRoute from "./SecuredRoute";
 
 import "notyf/notyf.min.css";
+import Footer from "../Footer/Footer";
 
 const App = () => {
   return (
@@ -56,6 +57,7 @@ const App = () => {
           <SecuredRoute path="/transferencias" component={Transferencias} />
         </div>
       </Router>
+      <Footer />
     </Provider>
   );
 };
