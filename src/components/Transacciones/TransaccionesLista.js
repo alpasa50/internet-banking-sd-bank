@@ -89,7 +89,7 @@ const TransaccionLista = ({
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 p-5">
       <Link to="/cuentas">
         <Button className="mb-4" type="primary">
           <i className="fas fa-arrow-left"></i>
