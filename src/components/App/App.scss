@@ -3,8 +3,6 @@ html {
   min-height: 100vh;
 }
 
-
-
 .wrapper {
   min-height: 100%;
 
@@ -62,6 +60,15 @@ i {
       }
     }
   }
+}
+
+.card-header {
+  color: white;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  filter: invert(100%);
 }
 
 .footer-c {
