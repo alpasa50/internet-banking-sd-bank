@@ -354,6 +354,7 @@ i {
 
 .title-styles {
   text-align: center;
+  color: #506cb2;
   font-size: 1.5rem;
 }
 
@@ -367,6 +368,7 @@ i {
 
 .card-styles {
   width: 18rem;
+
   & > * {
     font-size: 1rem;
     align-items: center;
@@ -376,4 +378,33 @@ i {
   .movimientos {
     color: #28c026;
   }
+}
+
+.card-image {
+  max-width: 300px;
+  max-height: 300px;
+  color: #001c61;
+}
+
+.num-cuenta {
+  color: #506cb2;
+  font-size: 18px;
+}
+
+.balance-cuenta {
+  margin-left: 30px;
+  color: #00b451;
+  font-size: 18px;
+}
+
+.fondos-disponibles {
+  margin-left: 3px;
+  color: #00b451;
+  font-size: 11px;
+}
+
+.alt-title {
+  font-size: 1.5rem;
+  color: #506cb2;
+  margin-bottom: 1.6rem;
 }

@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import Cuenta from "./Cuenta";
 import { fetchCuentasByClienteId } from "../../state-mgmt/actions/cuenta.actions";
 import { connect } from "react-redux";
@@ -27,14 +26,10 @@ const CuentasLista = ({
   );
 };
 
-const mapStateToProps = (state) => {
-  console.log(state);
-
-  return {
-    cuentasPersonales: state.cuentas.cuentasPersonales,
-    cliente: state.auth.cliente,
-  };
-};
+const mapStateToProps = (state) => ({
+  cuentasPersonales: state.cuentas.cuentasPersonales,
+  cliente: state.auth.cliente,
+});
 
 export default connect(mapStateToProps, {
   fetchCuentasByClienteId,

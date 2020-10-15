@@ -68,50 +68,6 @@ const Header = ({ usuarioActual, cerrarSesion, cliente }) => {
         </div>
       </HeaderL>
     </div>
-
-    // <Navbar style={mainStyle} bg="light" expand="lg">
-    //   <Container>
-    //     <Navbar.Brand>
-    //       <Link className="navbar-brand" to="/">
-    //         Sd-Bank
-    //       </Link>
-    //     </Navbar.Brand>
-    //     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    //     <Navbar.Collapse id="basic-navbar-nav">
-    //       {usuarioActual.email && cliente.nombre &&  (
-    //         <Nav className="ml-auto">
-    //           <Link className="navbar-brand" to="/cuentas">
-    //             Cuentas
-    //           </Link>
-    //           <Link className="navbar-brand" to="/link">
-    //             Transferencias
-    //           </Link>
-    //           <NavDropdown
-    //             title={`${cliente.nombre} ${cliente.apellido}`}
-    //             id="basic-nav-dropdown"
-    //           >
-    //             <NavDropdown.Item onClick={() => handleCerrarSesion()}>
-    //               <Link className="navbar-brand" to="/">
-    //                 Cerrar sesión
-    //               </Link>
-    //             </NavDropdown.Item>
-    //           </NavDropdown>
-    //         </Nav>
-    //       )}
-
-    //       {!usuarioActual.email && (
-    //         <Nav className="ml-auto">
-    //           <Link className="navbar-brand" to="/auth/iniciar-sesion">
-    //             Iniciar sesión
-    //           </Link>
-    //           <Link className="navbar-brand" to="/auth/registrarse">
-    //             Registrarse
-    //           </Link>
-    //         </Nav>
-    //       )}
-    //     </Navbar.Collapse>
-    //   </Container>
-    // </Navbar>
   );
 
   return <>{navbar}</>;
