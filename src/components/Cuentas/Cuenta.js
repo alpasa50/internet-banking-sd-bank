@@ -1,49 +1,112 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import { formatCurrency, formatDate } from "../../utils/formatter";
-import PropTypes from "prop-types";
-import { Card } from "react-bootstrap";
+import VisibilityIcon from "@material-ui/icons/Visibility";
 import { Redirect } from "react-router-dom";
+
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 325,
+    margin: 10,
+  },
+  media: {
+    height: 140,
+  },
+  overlay: {
+    position: "absolute",
+    top: "20px",
+    left: "20px",
+    color: "#fafafa",
+    padding: "8px 5px",
+    fontWeight: 500,
+    backgroundColor: "#001c61",
+  },
+});
 
 const Cuenta = ({ cuenta }) => {
   const [redirect, setRedirect] = useState("");
-
-  const createdAt = formatDate(cuenta.created_at);
 
   const handleRedirect = (path) => {
     setRedirect(`${path}`);
   };
 
-  return (
-    <Card className="card-styles">
-      {redirect && <Redirect to={redirect} />}
-      <Card.Body>
-        <Card.Title>{cuenta.numero_de_cuenta}</Card.Title>
-        <hr />
-        <Card.Subtitle className="mb-2 text-muted">
-          {cuenta.tipo_de_cuenta}
-        </Card.Subtitle>
-        <Card.Text style={{ color: "green" }}>
-          {formatCurrency(cuenta.balance_actual)} disponibles
-        </Card.Text>
-        <Card.Text>Esta cuenta fue abierta en {createdAt}.</Card.Text>
-        <Card.Link
-          onClick={() => handleRedirect(`/cuentas/${cuenta._id}/detalles`)}
-        >
-          <i className="ml-1 fas fa-info-circle"></i> Detalles
-        </Card.Link>
-        <Card.Link
-          className="ml-3 movimientos"
-          onClick={() => handleRedirect(`/cuentas/${cuenta._id}/transacciones`)}
-        >
-          Movimientos <i className="ml-1 fas fa-cash-register"></i>
-        </Card.Link>
-      </Card.Body>
-    </Card>
-  );
-};
+  const classes = useStyles();
 
-Cuenta.propTypes = {
-  cuenta: PropTypes.object.isRequired,
+  const beneficiariosDescription =
+    cuenta.beneficiarios.length === 0
+      ? ", no tiene beneficiarios"
+      : cuenta.beneficiarios.length === 1
+      ? ", tiene un beneficiario"
+      : `, tiene ${cuenta.beneficiarios.length} beneficiarios`;
+
+  const transaccionesDescripcion =
+    cuenta.transacciones.length === 0
+      ? " y aún no tiene transacciones procesadas."
+      : cuenta.transacciones.length === 1
+      ? " y una transacción procesada."
+      : ` y ${cuenta.transacciones.length} transacciones procesadas.`;
+
+  return (
+    <div className="row">
+      {redirect && <Redirect to={redirect} />}
+      <Card className={classes.root}>
+        <CardActionArea>
+          <CardMedia
+            className={classes.media}
+            image="https://picsum.photos/400/300"
+            title="Contemplative Reptile"
+          />
+          <div className={classes.overlay}>{cuenta.tipo_de_cuenta}</div>
+          <CardContent>
+            <Typography gutterBottom variant="h6" component="h2">
+              <span className="num-cuenta">{cuenta.numero_de_cuenta}</span>
+              <span className="balance-cuenta">
+                {cuenta.balance_disponible === 0
+                  ? "RD$0"
+                  : formatCurrency(cuenta.balance_disponible)}
+              </span>
+              <span className="fondos-disponibles">disponibles</span>
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Esta cuenta cuenta fue abierta en {formatDate(cuenta.createdAt)}
+              {beneficiariosDescription}
+              {transaccionesDescripcion}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <Button size="small" color="primary">
+            <VisibilityIcon
+              onClick={() => handleRedirect(`/cuentas/${cuenta._id}/detalles`)}
+            />
+          </Button>
+          <Button
+            size="small"
+            onClick={() =>
+              handleRedirect(`/cuentas/${cuenta._id}/transacciones`)
+            }
+          >
+            Movimientos
+          </Button>
+          <Button
+            size="small"
+            onClick={() =>
+              handleRedirect(`/cuentas/${cuenta._id}/beneficiarios`)
+            }
+          >
+            Beneficiarios
+          </Button>
+        </CardActions>
+      </Card>
+    </div>
+  );
 };
 
 export default Cuenta;

@@ -15,6 +15,8 @@ import TransaccionDetalles from "../Transacciones/TransaccionDetalles";
 import AuthRoute from "./AuthRoute";
 import PrestamosLista from "../Prestamos/PrestamosLista";
 import PrestamoDetalles from "../Prestamos/PrestamoDetalles";
+import BeneficiariosLista from "../Beneficiarios/BeneficiariosLista";
+import BeneficiariosCrear from "../Beneficiarios/BeneficiarioCrear";
 import Transferencias from "../Transferencias/Transferencias";
 import SecuredRoute from "./SecuredRoute";
 
@@ -47,12 +49,21 @@ const App = () => {
             component={TransaccionDetalles}
           />
           <SecuredRoute path="/cuentas" component={CuentasLista} />
+          <SecuredRoute
+            path="/cuentas/:_id/beneficiarios"
+            component={BeneficiariosLista}
+          />
+          <SecuredRoute
+            path="/cuentas/:_id/beneficiarios/crear"
+            component={BeneficiariosCrear}
+          />
 
           <SecuredRoute path="/prestamos" component={PrestamosLista} />
           <SecuredRoute
             path="/prestamos/:_id/detalles"
             component={PrestamoDetalles}
           />
+
           <SecuredRoute path="/transferencias" component={Transferencias} />
         </div>
       </Router>

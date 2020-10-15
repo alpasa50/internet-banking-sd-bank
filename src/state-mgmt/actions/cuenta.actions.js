@@ -11,7 +11,7 @@ import {
   TRANSFERENCIA_A_TERCERO,
   FETCH_CUENTA_FROM_TERCERO,
   FETCH_BENEFICIARIOS_FROM_CUENTA,
-  TRANSFERENCIA_INTERBANCARIA
+  TRANSFERENCIA_INTERBANCARIA,
 } from "../types/cuenta-types";
 
 const BASE_CUENTA_URL = `${API_URL}/cuentas`;
@@ -109,7 +109,7 @@ export const transferirAOtroBanco = (_id, body) => async (dispatch) => {
   );
 
   console.log(data);
-  
+
   dispatch({
     type: TRANSFERENCIA_INTERBANCARIA,
     payload: data,
@@ -129,8 +129,21 @@ export const fetchClienteNCuentaFromTercero = (_id, numero_de_cuenta) => async (
   });
 };
 
+export const fetchBeneficiariosFromCuenta = (_id) => async (dispatch) => {
+  const { data } = await axios.get(`${BASE_CUENTA_URL}/${_id}/beneficiarios`);
+
+  console.log(data);
+
+  dispatch({
+    type: FETCH_BENEFICIARIOS_FROM_CUENTA,
+    payload: data,
+  });
+};
+
 export const fetchBeneficiariosMismoBanco = (_id) => async (dispatch) => {
-  const { data } = await axios.get(`${BASE_CUENTA_URL}/${_id}/beneficiarios-mismo-banco`);
+  const { data } = await axios.get(
+    `${BASE_CUENTA_URL}/${_id}/beneficiarios-mismo-banco`
+  );
 
   dispatch({
     type: FETCH_BENEFICIARIOS_FROM_CUENTA,
@@ -139,7 +152,9 @@ export const fetchBeneficiariosMismoBanco = (_id) => async (dispatch) => {
 };
 
 export const fetchBeneficiariosInterbancarios = (_id) => async (dispatch) => {
-  const { data } = await axios.get(`${BASE_CUENTA_URL}/${_id}/beneficiarios-interbancarios`);
+  const { data } = await axios.get(
+    `${BASE_CUENTA_URL}/${_id}/beneficiarios-interbancarios`
+  );
 
   dispatch({
     type: FETCH_BENEFICIARIOS_FROM_CUENTA,
