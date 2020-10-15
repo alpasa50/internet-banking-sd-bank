@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { bancosDominicanos } from "../../utils/bancos-dominicanos";
 
 import { fetchCuentaById } from "../../state-mgmt/actions/cuenta.actions";
-
+import { Link } from "react-router-dom";
 const { Group } = Radio;
 
 const { Option } = Select;
@@ -41,6 +41,11 @@ const BeneficiarioCrear = ({ match, cuenta, beneficiarios, cliente }) => {
 
   return (
     <div className="mt-4">
+      <Link to="/cuentas/${cuenta._id}/beneficiarios">
+        <Button className="mb-4" type="primary">
+          <i className="fas fa-arrow-left"></i>
+        </Button>
+      </Link>
       <h2 className="alt-title">Agregar beneficiario</h2>
       {cuenta && cuenta.numero_de_cuenta && (
         <Form.Item name={"numero_de_cuenta"} label="Beneficiario a la cuenta">
