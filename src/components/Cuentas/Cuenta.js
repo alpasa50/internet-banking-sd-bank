@@ -14,10 +14,11 @@ import { Redirect } from "react-router-dom";
 const useStyles = makeStyles({
   root: {
     maxWidth: 325,
-    margin: 10,
+    margin: "10px 10px !important",
   },
   media: {
     height: 140,
+    margin: "10px 10px",
   },
   overlay: {
     position: "absolute",
@@ -32,6 +33,8 @@ const useStyles = makeStyles({
 
 const Cuenta = ({ cuenta }) => {
   const [redirect, setRedirect] = useState("");
+
+  const val = Math.floor(Math.random() * 901 + 1);
 
   const handleRedirect = (path) => {
     setRedirect(`${path}`);
@@ -56,11 +59,11 @@ const Cuenta = ({ cuenta }) => {
   return (
     <div className="row">
       {redirect && <Redirect to={redirect} />}
-      <Card className={classes.root}>
+      <Card className={classes.root} style={{ margin: "10px" }}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
-            image="https://picsum.photos/400/300"
+            image={`https://picsum.photos/${val}/300`}
             title="Contemplative Reptile"
           />
           <div className={classes.overlay}>{cuenta.tipo_de_cuenta}</div>

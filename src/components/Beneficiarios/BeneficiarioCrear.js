@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { bancosDominicanos } from "../../utils/bancos-dominicanos";
 import { Redirect } from "react-router-dom";
 
-
 import {
   fetchClienteNCuentaFromTercero,
   fetchCuentaById,
@@ -54,9 +53,9 @@ const BeneficiarioCrear = ({
   useEffect(() => {
     setError("");
 
-    if (cuentaTercero.length === 10) {
-      setError("");
+    console.log(cuentaTercero);
 
+    if (cuentaTercero.length === 10) {
       fetchClienteNCuentaFromTercero(cliente._id, cuentaTercero).catch((e) =>
         setError(e.response.data.error)
       );
@@ -68,9 +67,13 @@ const BeneficiarioCrear = ({
       Boolean(el)
     );
 
-    // setValido(formularioValido);
-    setValido(true);
-  }, [beneficiario]);
+    if (tipoBeneficiario === "Tercero") {
+      setValido(cuentaTercero.length === 10);
+    } else {
+      setValido(formularioValido);
+    }
+    // setValido(true);
+  }, [beneficiario, cuentaTercero]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -103,8 +106,11 @@ const BeneficiarioCrear = ({
                 }
               : {
                   tipo: "Tercero",
-                  cuenta_beneficiario: cuentaFromTercero.numero_de_cuenta,
+                  cuenta_beneficiario: beneficiario.cuenta_beneficiario,
+                  cuenta_beneficiario: cuentaTercero,
                 };
+
+          console.log(body);
 
           await createBeneficiario(_id, body);
 

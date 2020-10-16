@@ -17,10 +17,12 @@ const CuentasLista = ({
     <div className="mt-4">
       <h4 className="mb-3 title-styles">Cuentas</h4>
 
-      {cuentasPersonales &&
-        cuentasPersonales.map((cuenta) => (
-          <Cuenta key={cuenta._id} cuenta={cuenta} />
-        ))}
+      <div className="row">
+        {cuentasPersonales &&
+          cuentasPersonales.map((cuenta) => (
+            <Cuenta key={cuenta._id} cuenta={cuenta} />
+          ))}
+      </div>
     </div>
   );
 };
