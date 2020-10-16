@@ -3,22 +3,29 @@ import Carousel from "react-bootstrap/Carousel";
 import "../App/App.scss";
 
 const Home = () => {
+  const imgStyles = {
+    Width: "500px",
+    height: "250px",
+  };
+
   return (
-    <div className="text-center">
-      <img
-        src="/sd-bank-logo.jpeg"
-        className="p-5"
-        alt="logo"
-        width={500}
-        height={250}
-      />
+    <div className="container-mt-4 text-center">
+      <div className="row logo-text">
+        <img
+          src="https://res.cloudinary.com/dvoo3wu0v/image/upload/v1602795502/black_logo_qej0gv.png"
+          className="p-5"
+          alt="logo"
+          className="img-fluid mt-4"
+          style={imgStyles}
+        />
+        <h4>Donde tu dinero está seguro.</h4>
+      </div>
       <hr />
-      <h4 style={{ fontStyle: "italic" }}>Donde tu dinero esta seguro</h4>
       <Carousel>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="/Feria de Vehiculos.png"
+            src="https://res.cloudinary.com/dvoo3wu0v/image/upload/v1602795504/Feria_de_veh%C3%ADculos_gcrusq.png"
             alt="First slide"
           />
         </Carousel.Item>
@@ -37,9 +44,7 @@ const Home = () => {
       <div className="row p-5">
         <div className="col-lg-4 mb-4">
           <div className="card h-100">
-            <h4 className="card-header" style={{ backgroundColor: "#001529" }}>
-              Cuentas de ahorro
-            </h4>
+            <h4 className="card-header">Cuentas de ahorro</h4>
             <div className="card-body">
               <p
                 className="card-text"
@@ -52,20 +57,15 @@ const Home = () => {
                   width="100%"
                   height="100%"
                 />
-                "Ahorrar no es solo guardar, sino saber gastar"
+                Ahorrar no es solo guardar, sino también saber gastar
               </p>
             </div>
-            <div
-              className="card-footer"
-              style={{ backgroundColor: "#001529" }}
-            ></div>
+            <div className="card-footer"></div>
           </div>
         </div>
         <div className="col-lg-4 mb-4">
           <div className="card h-100">
-            <h4 className="card-header" style={{ backgroundColor: "#001529" }}>
-              Prestamos
-            </h4>
+            <h4 className="card-header">Préstamos</h4>
             <div className="card-body">
               <p
                 className="card-text"
@@ -78,20 +78,15 @@ const Home = () => {
                   width="80%"
                   height="85%"
                 />
-                "Solucion a tus compromisos de estudio o trabajo."
+                Solución a tus compromisos de estudio o trabajo.
               </p>
             </div>
-            <div
-              className="card-footer"
-              style={{ backgroundColor: "#001529" }}
-            ></div>
+            <div className="card-footer"></div>
           </div>
         </div>
         <div className="col-lg-4 mb-4">
           <div className="card h-100">
-            <h4 className="card-header" style={{ backgroundColor: "#001529" }}>
-              Transferencias
-            </h4>
+            <h4 className="card-header">Transferencias</h4>
             <div className="card-body">
               <p
                 className="card-text"
@@ -105,13 +100,10 @@ const Home = () => {
                   height="100%"
                 />
                 <br /> <br /> <br />
-                "Trasnferencias al instante a traves de la plataforma"
+                Transferencias al instante a través de la plataforma.
               </p>
             </div>
-            <div
-              className="card-footer"
-              style={{ backgroundColor: "#001529" }}
-            ></div>
+            <div className="card-footer"></div>
           </div>
         </div>
       </div>

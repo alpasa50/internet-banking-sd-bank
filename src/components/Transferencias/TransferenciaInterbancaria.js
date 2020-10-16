@@ -89,6 +89,8 @@ const TransferenciaInterbancaria = ({
 
     const { cantidad } = transferencia;
 
+    console.log("event", event);
+
     alertify.confirm(
       "Confirmar transferencia",
       `¿Seguro que desea transferir RD$${cantidad.toLocaleString()}?`,

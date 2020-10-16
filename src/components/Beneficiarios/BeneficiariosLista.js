@@ -4,10 +4,16 @@ import { fetchBeneficiariosFromCuenta } from "../../state-mgmt/actions/cuenta.ac
 import { formatDate } from "../../utils/formatter";
 import { Table, Button } from "antd";
 import { Link } from "react-router-dom";
+import { EyeOutlined, DeleteOutlined } from "@ant-design/icons";
+import notyf from "../../utils/notyf";
+import alertify from "alertifyjs";
+
+import { deleteBeneficiario } from "../../state-mgmt/actions/cuenta.actions";
 
 const BeneficiariosLista = ({
   match,
   fetchBeneficiariosFromCuenta,
+  deleteBeneficiario,
   beneficiarios,
 }) => {
   const { _id } = match.params;
@@ -37,7 +43,45 @@ const BeneficiariosLista = ({
       title: "Agregado en",
       dataIndex: "createdAt",
     },
+    {
+      title: "Operación",
+      key: "operacion",
+      render: (_, beneficiario) => (
+        <span>
+          <DeleteOutlined
+            style={deleteIStyles}
+            onClick={(event) => onDeleteBeneficiario(beneficiario.key, event)}
+          />
+        </span>
+      ),
+    },
   ];
+
+  const deleteIStyles = {
+    color: "#f52d1b",
+    fontSize: "1.2rem",
+  };
+
+  const onDeleteBeneficiario = async (beneficiarioId, event) => {
+    event.preventDefault();
+
+    alertify.confirm(
+      "Confirmar eliminación",
+      "¿Seguro que desea eliminar a este beneficiario?",
+      async () => {
+        try {
+          await deleteBeneficiario(beneficiarioId);
+
+          await fetchBeneficiariosFromCuenta(_id);
+
+          notyf.success("Beneficiario eliminado satisfactoriamente.");
+        } catch (error) {
+          notyf.error(error.response.data.error);
+        }
+      },
+      () => undefined
+    );
+  };
 
   const dataMapped =
     beneficiarios &&
@@ -78,4 +122,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   fetchBeneficiariosFromCuenta,
+  deleteBeneficiario,
 })(BeneficiariosLista);
