@@ -15,10 +15,10 @@ import TransaccionDetalles from "../Transacciones/TransaccionDetalles";
 import AuthRoute from "./AuthRoute";
 import PrestamosLista from "../Prestamos/PrestamosLista";
 import PrestamoDetalles from "../Prestamos/PrestamoDetalles";
-import BeneficiariosLista from "../Beneficiarios/BeneficiariosLista";
-import BeneficiariosCrear from "../Beneficiarios/BeneficiarioCrear";
 import Transferencias from "../Transferencias/Transferencias";
 import SecuredRoute from "./SecuredRoute";
+import BeneficiariosLista from "../Beneficiarios/BeneficiariosLista";
+import BeneficiariosCrear from "../Beneficiarios/BeneficiarioCrear";
 
 import "notyf/notyf.min.css";
 import Footer from "../Footer/Footer";
@@ -50,6 +50,7 @@ const App = () => {
             component={TransaccionDetalles}
           />
           <SecuredRoute path="/cuentas" component={CuentasLista} />
+
           <SecuredRoute
             path="/cuentas/:_id/beneficiarios"
             component={BeneficiariosLista}
@@ -64,7 +65,6 @@ const App = () => {
             path="/prestamos/:_id/detalles"
             component={PrestamoDetalles}
           />
-
           <SecuredRoute path="/transferencias" component={Transferencias} />
         </div>
       </Router>

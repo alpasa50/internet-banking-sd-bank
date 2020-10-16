@@ -22,10 +22,15 @@ const Header = ({ usuarioActual, cerrarSesion, cliente }) => {
     <div>
       <HeaderL className="header">
         <div className="container">
-          <div className="logo" />
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
             <Menu.Item key="1">
-              <Link to="/">SD Bank</Link>
+              <Link to="/">
+                <img
+                  className= "logo-img"
+                  src="https://res.cloudinary.com/dvoo3wu0v/image/upload/v1602797767/white-logo_hzrybt.png"
+                  alt="logo"
+                />
+              </Link>
             </Menu.Item>
             {/* <Menu.Item key="5" onClick={() => handleClick("clientes")}> */}
             {usuarioActual.email && (
@@ -68,6 +73,50 @@ const Header = ({ usuarioActual, cerrarSesion, cliente }) => {
         </div>
       </HeaderL>
     </div>
+
+    // <Navbar style={mainStyle} bg="light" expand="lg">
+    //   <Container>
+    //     <Navbar.Brand>
+    //       <Link className="navbar-brand" to="/">
+    //         Sd-Bank
+    //       </Link>
+    //     </Navbar.Brand>
+    //     <Navbar.Toggle aria-controls="basic-navbar-nav" />
+    //     <Navbar.Collapse id="basic-navbar-nav">
+    //       {usuarioActual.email && cliente.nombre &&  (
+    //         <Nav className="ml-auto">
+    //           <Link className="navbar-brand" to="/cuentas">
+    //             Cuentas
+    //           </Link>
+    //           <Link className="navbar-brand" to="/link">
+    //             Transferencias
+    //           </Link>
+    //           <NavDropdown
+    //             title={`${cliente.nombre} ${cliente.apellido}`}
+    //             id="basic-nav-dropdown"
+    //           >
+    //             <NavDropdown.Item onClick={() => handleCerrarSesion()}>
+    //               <Link className="navbar-brand" to="/">
+    //                 Cerrar sesión
+    //               </Link>
+    //             </NavDropdown.Item>
+    //           </NavDropdown>
+    //         </Nav>
+    //       )}
+
+    //       {!usuarioActual.email && (
+    //         <Nav className="ml-auto">
+    //           <Link className="navbar-brand" to="/auth/iniciar-sesion">
+    //             Iniciar sesión
+    //           </Link>
+    //           <Link className="navbar-brand" to="/auth/registrarse">
+    //             Registrarse
+    //           </Link>
+    //         </Nav>
+    //       )}
+    //     </Navbar.Collapse>
+    //   </Container>
+    // </Navbar>
   );
 
   return <>{navbar}</>;

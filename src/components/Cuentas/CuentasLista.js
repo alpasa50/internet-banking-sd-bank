@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useEffect } from "react";
 import Cuenta from "./Cuenta";
 import { fetchCuentasByClienteId } from "../../state-mgmt/actions/cuenta.actions";
 import { connect } from "react-redux";
@@ -14,9 +15,7 @@ const CuentasLista = ({
 
   return (
     <div className="mt-4">
-      <h4 className="mb-3 title-styles">
-        Cuentas de {cliente.nombre} {cliente.apellido}
-      </h4>
+      <h4 className="mb-3 title-styles">Cuentas</h4>
 
       {cuentasPersonales &&
         cuentasPersonales.map((cuenta) => (

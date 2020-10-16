@@ -10,7 +10,9 @@ import {
   TRANSFERENCIA_A_TERCERO,
   FETCH_CUENTA_FROM_TERCERO,
   FETCH_BENEFICIARIOS_FROM_CUENTA,
-  TRANSFERENCIA_INTERBANCARIA
+  TRANSFERENCIA_INTERBANCARIA,
+  CREATE_BENEFICIARIO,
+  DELETE_BENEFICIARIO,
 } from "../types/cuenta-types";
 
 const initialState = {
@@ -25,7 +27,7 @@ const initialState = {
   transaccion: {},
   beneficiarios: [],
   transaccionTipo: null,
-  resFactura: null
+  resFactura: null,
 };
 
 export default function (state = initialState, action) {
@@ -68,10 +70,18 @@ export default function (state = initialState, action) {
       return {
         ...state,
       };
+    case CREATE_BENEFICIARIO:
+      return {
+        ...state,
+      };
+    case DELETE_BENEFICIARIO:
+      return {
+        ...state,
+      };
     case TRANSFERENCIA_INTERBANCARIA:
       return {
         ...state,
-        resFactura: action.payload
+        resFactura: action.payload,
       };
     case FETCH_TRANSACCIONES_CUENTA:
       return {
@@ -81,8 +91,8 @@ export default function (state = initialState, action) {
     case FETCH_CUENTA_FROM_TERCERO:
       return {
         ...state,
-        destinatario: action.payload.cliente,
         cuentaFromTercero: action.payload.cuenta,
+        destinatario: action.payload.cliente,
       };
     case FETCH_BENEFICIARIOS_FROM_CUENTA:
       return {

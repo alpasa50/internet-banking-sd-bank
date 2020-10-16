@@ -12,6 +12,8 @@ import {
   FETCH_CUENTA_FROM_TERCERO,
   FETCH_BENEFICIARIOS_FROM_CUENTA,
   TRANSFERENCIA_INTERBANCARIA,
+  CREATE_BENEFICIARIO,
+  DELETE_BENEFICIARIO,
 } from "../types/cuenta-types";
 
 const BASE_CUENTA_URL = `${API_URL}/cuentas`;
@@ -123,6 +125,7 @@ export const fetchClienteNCuentaFromTercero = (_id, numero_de_cuenta) => async (
     `${BASE_CUENTA_URL}/${numero_de_cuenta}/cliente/${_id}/cliente-cuenta`
   );
 
+  console.log(data);
   dispatch({
     type: FETCH_CUENTA_FROM_TERCERO,
     payload: data,
@@ -158,6 +161,29 @@ export const fetchBeneficiariosInterbancarios = (_id) => async (dispatch) => {
 
   dispatch({
     type: FETCH_BENEFICIARIOS_FROM_CUENTA,
+    payload: data,
+  });
+};
+
+export const createBeneficiario = (_id, body) => async (dispatch) => {
+  console.log("hello World!");
+
+  const { data } = await axios.post(
+    `${BASE_CUENTA_URL}/${_id}/beneficiarios`,
+    body
+  );
+
+  dispatch({
+    type: CREATE_BENEFICIARIO,
+    payload: data,
+  });
+};
+
+export const deleteBeneficiario = (_id) => async (dispatch) => {
+  const { data } = await axios.delete(`${BASE_CUENTA_URL}/beneficiarios/${_id}`);
+
+  dispatch({
+    type: DELETE_BENEFICIARIO,
     payload: data,
   });
 };
